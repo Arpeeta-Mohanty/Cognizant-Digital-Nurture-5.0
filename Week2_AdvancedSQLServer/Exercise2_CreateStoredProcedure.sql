@@ -1,0 +1,2 @@
+-- This file has been superseded.
+-- Please refer to Exercise3_CreateStoredProcedure.sql for the stored procedure implementation.
