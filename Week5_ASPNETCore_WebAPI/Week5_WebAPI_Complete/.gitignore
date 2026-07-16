@@ -1,0 +1,243 @@
+# =============================================================================
+# .gitignore for ASP.NET Core 8.0 Web API
+# Visual Studio 2022 | .NET 8 | C#
+# =============================================================================
+
+
+# =============================================================================
+# BUILD OUTPUT
+# =============================================================================
+
+# Compiled output directories
+bin/
+obj/
+
+# Published output
+publish/
+**/publish/
+out/
+
+
+# =============================================================================
+# VISUAL STUDIO 2022
+# =============================================================================
+
+# VS hidden workspace folder
+.vs/
+
+# User-specific settings
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio backup files
+*.bak
+*.orig
+
+# Visual Studio cache / options
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Installer
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+
+# =============================================================================
+# VS CODE
+# =============================================================================
+
+.vscode/
+!.vscode/extensions.json
+
+
+# =============================================================================
+# JETBRAINS RIDER
+# =============================================================================
+
+.idea/
+*.sln.iml
+
+
+# =============================================================================
+# RESHARPER
+# =============================================================================
+
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+
+# =============================================================================
+# NUGET
+# =============================================================================
+
+# NuGet packages directory
+packages/
+*.nupkg
+*.snupkg
+
+# NuGet Symbol Packages
+*.symbols.nupkg
+
+# NuGet v3+ cache
+.nuget/
+nuget.config.user
+
+# Package restore stamp file
+**/packages/build/
+
+
+# =============================================================================
+# DOTNET / ASP.NET CORE
+# =============================================================================
+
+# .NET Core project lock file
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Core Scaffolding
+ScaffoldingReadMe.txt
+
+# Bundler & Minifier
+bundleconfig.json.bak
+
+# Entity Framework migrations (keep migrations, ignore snapshots if preferred)
+# Uncomment below only if you want to exclude EF snapshots:
+# **/Migrations/*Snapshot.cs
+
+# App secrets (never commit secrets)
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+
+
+# =============================================================================
+# PUBLISH PROFILES
+# =============================================================================
+
+**/Properties/PublishProfiles/
+*.pubxml
+*.pubxml.user
+*.publishproj
+
+
+# =============================================================================
+# TEST RESULTS
+# =============================================================================
+
+[Tt]est[Rr]esult*/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*/
+[Cc]overage*/
+
+
+# =============================================================================
+# LOG FILES
+# =============================================================================
+
+*.log
+Logs/
+logs/
+**/Logs/*.txt
+**/logs/*.txt
+
+
+# =============================================================================
+# TEMPORARY & CACHE FILES
+# =============================================================================
+
+*.tmp
+*.temp
+*.cache
+*.swp
+*~
+.sass-cache/
+.cache/
+
+
+# =============================================================================
+# ENVIRONMENT & SECRETS
+# =============================================================================
+
+# Never commit environment or secret files
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+*.pem
+
+
+# =============================================================================
+# OS-GENERATED FILES
+# =============================================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+
+# =============================================================================
+# KAFKA (Hands-On 6)
+# =============================================================================
+
+# Kafka local data and logs (if running broker locally inside project)
+kafka-logs/
+zookeeper-data/
+
+
+# =============================================================================
+# MISC
+# =============================================================================
+
+# Compressed archives (avoid committing zip submissions)
+*.zip
+*.tar.gz
+*.rar
+
+# JetBrains dotCover
+*.dotCover
