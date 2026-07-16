@@ -1,0 +1,178 @@
+{
+  "info": {
+    "name": "Week5 Web API – Complete Collection",
+    "description": "Postman collection covering all 6 Hands-On exercises.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token",   "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Hands-On 5 – Auth",
+      "item": [
+        {
+          "name": "Login (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set('token', json.token);",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Token present', () => pm.expect(json.token).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Auth/login"
+          }
+        },
+        {
+          "name": "Login (POC)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"poc\",\n  \"password\": \"Poc@123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Auth/login"
+          }
+        },
+        {
+          "name": "Login – Invalid (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"wrongpassword\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hands-On 1 – Values",
+      "item": [
+        {
+          "name": "GET All Values",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Values" }
+        },
+        {
+          "name": "GET Value by Id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Values/0" }
+        },
+        {
+          "name": "POST Add Value",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "\"newValue\"" },
+            "url": "{{baseUrl}}/api/Values"
+          }
+        },
+        {
+          "name": "PUT Update Value",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "\"updatedValue\"" },
+            "url": "{{baseUrl}}/api/Values/0"
+          }
+        },
+        {
+          "name": "DELETE Value",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/Values/0" }
+        }
+      ]
+    },
+    {
+      "name": "Hands-On 2-4 – Employee (Public)",
+      "item": [
+        {
+          "name": "GET All Employees",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Emp" }
+        },
+        {
+          "name": "GET Employee by Id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Emp/1" }
+        },
+        {
+          "name": "GET Employee – Invalid Id (400)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Emp/0" }
+        },
+        {
+          "name": "GET Employee – Not Found (400)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/Emp/999" }
+        }
+      ]
+    },
+    {
+      "name": "Hands-On 4-5 – Employee (JWT Required)",
+      "item": [
+        {
+          "name": "POST Create Employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"name\": \"Carol White\",\n  \"salary\": 80000,\n  \"permanent\": true,\n  \"dateOfBirth\": \"1992-03-10T00:00:00\",\n  \"department\": { \"id\": 1, \"name\": \"Engineering\" },\n  \"skills\": [{ \"id\": 4, \"name\": \"React\" }]\n}"
+            },
+            "url": "{{baseUrl}}/api/Emp"
+          }
+        },
+        {
+          "name": "PUT Update Employee",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"Alice Johnson Updated\",\n  \"salary\": 90000,\n  \"permanent\": true,\n  \"dateOfBirth\": \"1990-05-15T00:00:00\",\n  \"department\": { \"id\": 1, \"name\": \"Engineering\" },\n  \"skills\": [{ \"id\": 1, \"name\": \"C#\" }, { \"id\": 5, \"name\": \"Kubernetes\" }]\n}"
+            },
+            "url": "{{baseUrl}}/api/Emp/1"
+          }
+        },
+        {
+          "name": "DELETE Employee",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/Emp/2"
+          }
+        },
+        {
+          "name": "POST – No Token (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 10,\n  \"name\": \"Test\",\n  \"salary\": 50000,\n  \"permanent\": false,\n  \"dateOfBirth\": \"2000-01-01T00:00:00\",\n  \"department\": null,\n  \"skills\": []\n}"
+            },
+            "url": "{{baseUrl}}/api/Emp"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "AZdAmwR+rM4=",
+  "success": true,
+  "projectFilePath": "c:\\Users\\ARPEETA MOHANTY\\Downloads\\Cognizant\\Week5_ASPNETCore_WebAPI\\Week5_WebAPI_Complete\\Kafka\\Consumer\\KafkaConsumer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ARPEETA MOHANTY\\.nuget\\packages\\confluent.kafka\\2.3.0\\confluent.kafka.2.3.0.nupkg.sha512",
+    "C:\\Users\\ARPEETA MOHANTY\\.nuget\\packages\\librdkafka.redist\\2.3.0\\librdkafka.redist.2.3.0.nupkg.sha512",
+    "C:\\Users\\ARPEETA MOHANTY\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

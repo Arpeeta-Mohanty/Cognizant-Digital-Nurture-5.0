@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Week5_WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Week5_WebAPI.Controllers.LoginRequest">
+            <summary>Request payload for login.</summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.LoginRequest.#ctor(System.String,System.String)">
+            <summary>Request payload for login.</summary>
+        </member>
+        <member name="T:Week5_WebAPI.Controllers.AuthController">
+            <summary>
+            Hands-On 5 – JWT Authentication.
+            Issues a signed JWT token valid for 10 minutes.
+            </summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.AuthController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>Injects IConfiguration for JWT settings.</summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.AuthController.Login(Week5_WebAPI.Controllers.LoginRequest)">
+             <summary>
+             Authenticates a user and returns a JWT token.
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /api/Auth/login
+                 {
+                     "username": "admin",
+                     "password": "Admin@123"
+                 }
+            
+             </remarks>
+             <param name="request">Login credentials.</param>
+             <returns>JWT bearer token.</returns>
+        </member>
+        <member name="T:Week5_WebAPI.Controllers.EmployeeController">
+            <summary>
+            Hands-On 2-5 – Employee CRUD API.
+            Route changed from api/[controller] to api/Emp (Hands-On 2).
+            Protected by JWT [Authorize] (Hands-On 5).
+            </summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.EmployeeController.GetAll">
+            <summary>Returns all employees.</summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.EmployeeController.GetById(System.Int32)">
+            <summary>Returns a single employee by ID.</summary>
+            <param name="id">Employee ID (must be &gt; 0).</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.EmployeeController.Create(Week5_WebAPI.Models.Employee)">
+            <summary>Creates a new employee. Requires Admin role.</summary>
+            <param name="employee">Employee payload.</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.EmployeeController.Update(System.Int32,Week5_WebAPI.Models.Employee)">
+            <summary>Updates an existing employee. Requires Admin role.</summary>
+            <param name="id">Employee ID to update.</param>
+            <param name="updated">Updated employee data.</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.EmployeeController.Delete(System.Int32)">
+            <summary>Deletes an employee by ID. Requires Admin role.</summary>
+            <param name="id">Employee ID to delete.</param>
+        </member>
+        <member name="T:Week5_WebAPI.Controllers.ValuesController">
+            <summary>
+            Hands-On 1 – Basic Web API demonstrating REST verbs and HTTP status codes.
+            </summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.ValuesController.Get">
+            <summary>Returns all values. HTTP 200 OK.</summary>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.ValuesController.Get(System.Int32)">
+            <summary>Returns a single value by index. HTTP 200 or 404.</summary>
+            <param name="id">Zero-based index.</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.ValuesController.Post(System.String)">
+            <summary>Adds a new value. HTTP 201 Created.</summary>
+            <param name="value">String value to add.</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.ValuesController.Put(System.Int32,System.String)">
+            <summary>Updates an existing value by index. HTTP 200 or 400.</summary>
+            <param name="id">Zero-based index.</param>
+            <param name="value">New string value.</param>
+        </member>
+        <member name="M:Week5_WebAPI.Controllers.ValuesController.Delete(System.Int32)">
+            <summary>Deletes a value by index. HTTP 204 No Content or 400.</summary>
+            <param name="id">Zero-based index.</param>
+        </member>
+        <member name="T:Week5_WebAPI.Filters.CustomAuthFilter">
+            <summary>
+            Action filter that validates the Authorization header contains a Bearer token.
+            Returns HTTP 400 if the header is missing or malformed.
+            </summary>
+        </member>
+        <member name="M:Week5_WebAPI.Filters.CustomAuthFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Week5_WebAPI.Filters.CustomAuthFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Week5_WebAPI.Filters.CustomExceptionFilter">
+            <summary>
+            Global exception filter. Logs unhandled exceptions to Logs/error.txt
+            and returns HTTP 500 with a safe error message.
+            </summary>
+        </member>
+        <member name="M:Week5_WebAPI.Filters.CustomExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Week5_WebAPI.Models.Department">
+            <summary>Department reference data.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Department.Id">
+            <summary>Unique department identifier.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Department.Name">
+            <summary>Department name.</summary>
+        </member>
+        <member name="T:Week5_WebAPI.Models.Employee">
+            <summary>Employee entity.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Id">
+            <summary>Unique employee identifier.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Name">
+            <summary>Full name of the employee.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Salary">
+            <summary>Annual salary.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Permanent">
+            <summary>Indicates whether the employee is permanent.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Department">
+            <summary>Department the employee belongs to.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.Skills">
+            <summary>List of skills the employee possesses.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Employee.DateOfBirth">
+            <summary>Date of birth.</summary>
+        </member>
+        <member name="T:Week5_WebAPI.Models.Skill">
+            <summary>Skill possessed by an employee.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Skill.Id">
+            <summary>Unique skill identifier.</summary>
+        </member>
+        <member name="P:Week5_WebAPI.Models.Skill.Name">
+            <summary>Skill name (e.g. C#, Azure).</summary>
+        </member>
+    </members>
+</doc>

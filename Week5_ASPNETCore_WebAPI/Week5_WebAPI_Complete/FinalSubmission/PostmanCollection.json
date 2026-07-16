@@ -1,0 +1,8 @@
+{
+  "info": {
+    "name": "Week5 Web API – Final Submission",
+    "description": "Final Postman collection for submission. Import this file into Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "_comment": "See docs/PostmanCollection.json for the full collection with all requests."
+}
