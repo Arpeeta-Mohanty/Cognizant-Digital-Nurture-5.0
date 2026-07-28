@@ -1,0 +1,26 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
+
+.page-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 50px 60px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.page-card h1 { font-size: 2rem; margin-bottom: 16px; }
+.page-card p  { color: #555; font-size: 1.05rem; margin-bottom: 8px; }
+
+.home     { border-top: 5px solid #4caf50; }
+.about    { border-top: 5px solid #2196f3; }
+.contact  { border-top: 5px solid #ff9800; }
+.services { border-top: 5px solid #9c27b0; }
+
+.service-list { list-style: none; padding: 0; }
+.service-list li { padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #444; font-size: 1rem; }

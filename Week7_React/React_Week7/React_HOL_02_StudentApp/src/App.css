@@ -1,0 +1,20 @@
+.app-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.app-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #667eea;
+}
+
+.pages-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

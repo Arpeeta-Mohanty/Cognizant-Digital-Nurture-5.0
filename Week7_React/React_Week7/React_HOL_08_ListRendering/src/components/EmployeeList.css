@@ -1,0 +1,3 @@
+.list-container { max-width: 900px; margin: 0 auto; }
+.list-info { margin-bottom: 20px; color: #555; font-size: 1rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }

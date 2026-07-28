@@ -1,0 +1,62 @@
+.form-wrapper { max-width: 500px; margin: 0 auto; }
+
+.reg-form {
+  background: #fff;
+  padding: 36px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus { border-color: #667eea; }
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submit-btn:hover { opacity: 0.9; }
+
+.result-card {
+  margin-top: 24px;
+  background: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.result-card h3 { color: #2e7d32; margin-bottom: 16px; }
+
+.result-card table { width: 100%; border-collapse: collapse; }
+.result-card td { padding: 8px 12px; border-bottom: 1px solid #c8e6c9; }
+.result-card td:first-child { font-weight: 600; color: #555; width: 40%; }
+.result-card td:last-child { color: #222; }

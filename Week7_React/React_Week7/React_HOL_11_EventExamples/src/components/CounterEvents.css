@@ -1,0 +1,46 @@
+.event-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+.event-card h2 { color: #667eea; margin-bottom: 20px; }
+
+.count-display {
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.message-box {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.synthetic-box {
+  background: #f3e5f5;
+  color: #6a1b9a;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-family: monospace;
+}
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+
+.btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+.btn:hover { opacity: 0.85; }
+
+.btn-green  { background: #4caf50; color: #fff; }
+.btn-red    { background: #f44336; color: #fff; }
+.btn-blue   { background: #2196f3; color: #fff; }
+.btn-purple { background: #9c27b0; color: #fff; }

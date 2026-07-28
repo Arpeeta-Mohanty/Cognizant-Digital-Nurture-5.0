@@ -1,0 +1,42 @@
+.app-container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+.app-header {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-header h1 { font-size: 1.6rem; }
+
+.auth-status { display: flex; align-items: center; gap: 12px; }
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.logged-in { background: rgba(76,175,80,0.3); }
+.status-badge.guest     { background: rgba(255,152,0,0.3); }
+
+.auth-btn {
+  padding: 8px 20px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-btn:hover { background: rgba(255,255,255,0.2); }

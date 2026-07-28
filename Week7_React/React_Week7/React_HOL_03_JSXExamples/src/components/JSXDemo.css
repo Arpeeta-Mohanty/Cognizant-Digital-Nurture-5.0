@@ -1,0 +1,26 @@
+.demo-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-left: 5px solid #667eea;
+}
+
+.demo-section h2 {
+  color: #667eea;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.demo-section p { margin: 6px 0; font-size: 1rem; color: #333; }
+
+.attr-demo { color: #2e7d32; font-weight: 500; }
+
+code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #c62828;
+}
