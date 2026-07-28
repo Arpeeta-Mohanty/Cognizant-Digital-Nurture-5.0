@@ -1,0 +1,41 @@
+.course-list-page { padding: 1.5rem 0; }
+
+.filters { margin-bottom: 1.5rem; }
+
+.filter-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-row .form-control { flex: 1; min-width: 150px; }
+
+.course-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+.instructor { color: #718096; font-size: 0.88rem; margin-bottom: 0.5rem; }
+.desc { font-size: 0.85rem; color: #4a5568; margin-bottom: 0.75rem; }
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }

@@ -1,0 +1,48 @@
+<div class="detail-page container">
+  <button class="btn btn-secondary back-btn" (click)="goBack()">← Back to Courses</button>
+
+  <div class="alert alert-info" *ngIf="loading">Loading course details...</div>
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <div class="detail-card card" *ngIf="course">
+    <div class="detail-header">
+      <div>
+        <span class="badge badge-blue">{{ course.category }}</span>
+        <span class="badge" [ngClass]="course.enrolled ? 'badge-green' : 'badge-yellow'" style="margin-left:0.5rem">
+          {{ course.enrolled ? '✓ Enrolled' : 'Not Enrolled' }}
+        </span>
+      </div>
+      <span class="course-id">ID: {{ course.id }}</span>
+    </div>
+
+    <h1 class="course-title">{{ course.title }}</h1>
+    <p class="instructor">👨🏫 Instructor: <strong>{{ course.instructor }}</strong></p>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Credits</span>
+        <span class="info-value">{{ course.credits | creditLabel }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Rating</span>
+        <span class="info-value">⭐ {{ course.rating }} / 5.0</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Duration</span>
+        <span class="info-value">⏱ {{ course.duration }}</span>
+      </div>
+    </div>
+
+    <div class="description">
+      <h3>About This Course</h3>
+      <p>{{ course.description }}</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn" [ngClass]="course.enrolled ? 'btn-danger' : 'btn-success'" (click)="onEnroll()">
+        {{ course.enrolled ? 'Unenroll' : 'Enroll Now' }}
+      </button>
+      <a routerLink="/enrollment" class="btn btn-primary">Go to Enrollment Form</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+Welcome to Git!
+This is my first repository.
+Created as part of Cognizant Digital Nurture 5.0 - Week 8.

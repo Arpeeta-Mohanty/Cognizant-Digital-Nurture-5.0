@@ -1,0 +1,187 @@
+<!-- Hands-On 4: Template Driven Forms -->
+<div class="enrollment-page container">
+  <h1 class="page-title">Course Enrollment Form</h1>
+  <p class="subtitle">Template-Driven Form with Validation</p>
+
+  <!-- Success Message -->
+  <div class="success-msg" *ngIf="successMessage">
+    ✅ {{ successMessage }}
+  </div>
+
+  <!-- #enrollForm creates a template reference to the NgForm directive -->
+  <form #enrollForm="ngForm" (ngSubmit)="onSubmit(enrollForm)" class="enrollment-form card" novalidate>
+
+    <div class="form-row">
+      <!-- Student Name -->
+      <div class="form-group">
+        <label for="studentName">Student Name *</label>
+        <input
+          id="studentName"
+          type="text"
+          class="form-control"
+          name="studentName"
+          [(ngModel)]="formData.studentName"
+          #studentName="ngModel"
+          required
+          minlength="3"
+          maxlength="50"
+          [ngClass]="{ 'is-invalid': studentName.invalid && studentName.touched, 'is-valid': studentName.valid && studentName.touched }"
+          placeholder="Enter full name"
+        />
+        <!-- Validation error messages -->
+        <div class="error-msg" *ngIf="studentName.invalid && studentName.touched">
+          <span *ngIf="studentName.errors?.['required']">Name is required.</span>
+          <span *ngIf="studentName.errors?.['minlength']">Name must be at least 3 characters.</span>
+          <span *ngIf="studentName.errors?.['maxlength']">Name cannot exceed 50 characters.</span>
+        </div>
+      </div>
+
+      <!-- Student Email -->
+      <div class="form-group">
+        <label for="studentEmail">Email Address *</label>
+        <input
+          id="studentEmail"
+          type="email"
+          class="form-control"
+          name="studentEmail"
+          [(ngModel)]="formData.studentEmail"
+          #studentEmail="ngModel"
+          required
+          email
+          [ngClass]="{ 'is-invalid': studentEmail.invalid && studentEmail.touched, 'is-valid': studentEmail.valid && studentEmail.touched }"
+          placeholder="student@example.com"
+        />
+        <div class="error-msg" *ngIf="studentEmail.invalid && studentEmail.touched">
+          <span *ngIf="studentEmail.errors?.['required']">Email is required.</span>
+          <span *ngIf="studentEmail.errors?.['email']">Enter a valid email address.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Roll Number -->
+      <div class="form-group">
+        <label for="rollNumber">Roll Number *</label>
+        <input
+          id="rollNumber"
+          type="text"
+          class="form-control"
+          name="rollNumber"
+          [(ngModel)]="formData.rollNumber"
+          #rollNumber="ngModel"
+          required
+          pattern="[A-Z]{3}[0-9]{7}"
+          [ngClass]="{ 'is-invalid': rollNumber.invalid && rollNumber.touched, 'is-valid': rollNumber.valid && rollNumber.touched }"
+          placeholder="e.g. CTS2025001"
+        />
+        <div class="error-msg" *ngIf="rollNumber.invalid && rollNumber.touched">
+          <span *ngIf="rollNumber.errors?.['required']">Roll number is required.</span>
+          <span *ngIf="rollNumber.errors?.['pattern']">Format: 3 uppercase letters + 7 digits (e.g. CTS2025001)</span>
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="form-group">
+        <label for="department">Department *</label>
+        <select
+          id="department"
+          class="form-control"
+          name="department"
+          [(ngModel)]="formData.department"
+          #department="ngModel"
+          required
+          [ngClass]="{ 'is-invalid': department.invalid && department.touched, 'is-valid': department.valid && department.touched }"
+        >
+          <option value="">-- Select Department --</option>
+          <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+        </select>
+        <div class="error-msg" *ngIf="department.invalid && department.touched">
+          <span *ngIf="department.errors?.['required']">Please select a department.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Course -->
+      <div class="form-group">
+        <label for="courseId">Course *</label>
+        <select
+          id="courseId"
+          class="form-control"
+          name="courseId"
+          [(ngModel)]="formData.courseId"
+          #courseId="ngModel"
+          required
+          (change)="onCourseChange()"
+          [ngClass]="{ 'is-invalid': courseId.invalid && courseId.touched, 'is-valid': courseId.valid && courseId.touched }"
+        >
+          <option [value]="0">-- Select Course --</option>
+          <option *ngFor="let course of courses" [value]="course.id">
+            {{ course.title }} ({{ course.credits }} credits)
+          </option>
+        </select>
+        <div class="error-msg" *ngIf="courseId.invalid && courseId.touched">
+          <span *ngIf="courseId.errors?.['required']">Please select a course.</span>
+        </div>
+      </div>
+
+      <!-- Semester -->
+      <div class="form-group">
+        <label for="semester">Semester *</label>
+        <select
+          id="semester"
+          class="form-control"
+          name="semester"
+          [(ngModel)]="formData.semester"
+          #semester="ngModel"
+          required
+          [ngClass]="{ 'is-invalid': semester.invalid && semester.touched, 'is-valid': semester.valid && semester.touched }"
+        >
+          <option [value]="0">-- Select Semester --</option>
+          <option *ngFor="let sem of semesters" [value]="sem">Semester {{ sem }}</option>
+        </select>
+        <div class="error-msg" *ngIf="semester.invalid && semester.touched">
+          <span *ngIf="semester.errors?.['required']">Please select a semester.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enrollment Date -->
+    <div class="form-group">
+      <label for="enrollmentDate">Enrollment Date *</label>
+      <input
+        id="enrollmentDate"
+        type="date"
+        class="form-control"
+        name="enrollmentDate"
+        [(ngModel)]="formData.enrollmentDate"
+        #enrollmentDate="ngModel"
+        required
+        [ngClass]="{ 'is-invalid': enrollmentDate.invalid && enrollmentDate.touched }"
+      />
+      <div class="error-msg" *ngIf="enrollmentDate.invalid && enrollmentDate.touched">
+        Date is required.
+      </div>
+    </div>
+
+    <!-- Form Status Debug Panel -->
+    <div class="debug-panel">
+      <strong>Form Status:</strong>
+      Valid: <code>{{ enrollForm.valid }}</code> |
+      Dirty: <code>{{ enrollForm.dirty }}</code> |
+      Touched: <code>{{ enrollForm.touched }}</code> |
+      Submitted: <code>{{ enrollForm.submitted }}</code>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success" [disabled]="submitted">
+        {{ submitted ? 'Enrolling...' : 'Enroll Now' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onReset(enrollForm)">
+        Reset Form
+      </button>
+    </div>
+
+  </form>
+</div>

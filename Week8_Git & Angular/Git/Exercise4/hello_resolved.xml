@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Conflict resolved: combined both branch greetings -->
+<root>
+    <greeting>Hello Everyone and Hello Universe</greeting>
+    <author>Student</author>
+    <resolved>true</resolved>
+</root>

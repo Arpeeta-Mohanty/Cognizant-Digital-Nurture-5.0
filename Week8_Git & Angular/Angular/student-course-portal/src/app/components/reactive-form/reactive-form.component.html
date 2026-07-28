@@ -1,0 +1,144 @@
+<!-- Hands-On 5: Reactive Forms -->
+<div class="reactive-page container">
+  <h1 class="page-title">Student Registration</h1>
+  <p class="subtitle">Reactive Form — FormBuilder, FormGroup, FormArray, Custom & Async Validators</p>
+
+  <!-- Success Panel -->
+  <div class="success-panel card" *ngIf="successData">
+    <h3>✅ Registration Successful!</h3>
+    <pre>{{ successData | json }}</pre>
+    <button class="btn btn-primary" (click)="successData = null">Register Another</button>
+  </div>
+
+  <!-- [formGroup] binds the FormGroup to the form element -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="reactive-form card" *ngIf="!successData" novalidate>
+
+    <!-- Student Name -->
+    <div class="form-group">
+      <label>Student Name *</label>
+      <input type="text" class="form-control" formControlName="studentName"
+             [ngClass]="{ 'is-invalid': isInvalid('studentName'), 'is-valid': isValid('studentName') }"
+             placeholder="Full name" />
+      <div class="error-msg" *ngIf="hasError('studentName', 'required')">Name is required.</div>
+      <div class="error-msg" *ngIf="hasError('studentName', 'minlength')">Minimum 3 characters.</div>
+      <div class="error-msg" *ngIf="hasError('studentName', 'maxlength')">Maximum 50 characters.</div>
+    </div>
+
+    <!-- Email with Async Validator -->
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" class="form-control" formControlName="studentEmail"
+             [ngClass]="{ 'is-invalid': isInvalid('studentEmail'), 'is-valid': isValid('studentEmail') }"
+             placeholder="student@example.com" />
+      <span class="checking" *ngIf="ctrl('studentEmail').pending">⏳ Checking availability...</span>
+      <div class="error-msg" *ngIf="hasError('studentEmail', 'required')">Email is required.</div>
+      <div class="error-msg" *ngIf="hasError('studentEmail', 'email')">Invalid email format.</div>
+      <div class="error-msg" *ngIf="hasError('studentEmail', 'emailTaken')">
+        ❌ This email is already registered. Try: admin@portal.com to see this error.
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Roll Number with Custom Validator -->
+      <div class="form-group">
+        <label>Roll Number *</label>
+        <input type="text" class="form-control" formControlName="rollNumber"
+               [ngClass]="{ 'is-invalid': isInvalid('rollNumber'), 'is-valid': isValid('rollNumber') }"
+               placeholder="e.g. CTS2025001" />
+        <div class="error-msg" *ngIf="hasError('rollNumber', 'required')">Roll number is required.</div>
+        <div class="error-msg" *ngIf="hasError('rollNumber', 'invalidRollNumber')">
+          Format: 3 uppercase letters + 7 digits (e.g. CTS2025001)
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="form-group">
+        <label>Department *</label>
+        <select class="form-control" formControlName="department"
+                [ngClass]="{ 'is-invalid': isInvalid('department'), 'is-valid': isValid('department') }">
+          <option value="">-- Select --</option>
+          <option *ngFor="let d of departments" [value]="d">{{ d }}</option>
+        </select>
+        <div class="error-msg" *ngIf="hasError('department', 'required')">Department is required.</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Semester -->
+      <div class="form-group">
+        <label>Semester *</label>
+        <input type="number" class="form-control" formControlName="semester" min="1" max="8"
+               [ngClass]="{ 'is-invalid': isInvalid('semester'), 'is-valid': isValid('semester') }"
+               placeholder="1–8" />
+        <div class="error-msg" *ngIf="hasError('semester', 'required')">Semester is required.</div>
+        <div class="error-msg" *ngIf="hasError('semester', 'min') || hasError('semester', 'max')">
+          Semester must be between 1 and 8.
+        </div>
+      </div>
+
+      <!-- Enrollment Date -->
+      <div class="form-group">
+        <label>Enrollment Date *</label>
+        <input type="date" class="form-control" formControlName="enrollmentDate"
+               [ngClass]="{ 'is-invalid': isInvalid('enrollmentDate') }" />
+        <div class="error-msg" *ngIf="hasError('enrollmentDate', 'required')">Date is required.</div>
+      </div>
+    </div>
+
+    <!-- FormArray: Course Selection -->
+    <div class="form-group">
+      <label>Select Courses * (FormArray)</label>
+      <div class="course-checkboxes">
+        <label class="checkbox-item" *ngFor="let course of courses">
+          <input type="checkbox"
+                 [checked]="isCourseSelected(course.id)"
+                 (change)="onCourseToggle(course.id, $any($event.target).checked)" />
+          {{ course.title }} ({{ course.credits }} credits)
+        </label>
+      </div>
+      <div class="error-msg" *ngIf="selectedCourses.invalid && selectedCourses.touched">
+        Please select at least one course.
+      </div>
+      <small class="hint">Selected: {{ selectedCourses.value | json }}</small>
+    </div>
+
+    <!-- Nested FormGroup: Contact Info -->
+    <div formGroupName="contactInfo" class="nested-group">
+      <h3>Contact Information (Optional)</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" class="form-control" formControlName="phone"
+                 [ngClass]="{ 'is-invalid': isInvalid('contactInfo.phone') }"
+                 placeholder="10-digit mobile number" />
+          <div class="error-msg" *ngIf="hasError('contactInfo.phone', 'pattern')">
+            Enter a valid 10-digit Indian mobile number.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea class="form-control" formControlName="address" rows="2"
+                    placeholder="Optional address"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Status Debug -->
+    <div class="debug-panel">
+      <strong>Form Status:</strong>
+      Valid: <code>{{ form.valid }}</code> |
+      Dirty: <code>{{ form.dirty }}</code> |
+      Pending: <code>{{ form.pending }}</code> |
+      Errors: <code>{{ form.errors | json }}</code>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success" [disabled]="form.pending || submitted">
+        {{ form.pending ? 'Validating...' : 'Submit Registration' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
+    </div>
+
+  </form>
+</div>

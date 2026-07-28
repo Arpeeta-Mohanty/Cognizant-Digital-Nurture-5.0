@@ -1,0 +1,66 @@
+<div class="profile-page container">
+  <h1 class="page-title">Student Profile</h1>
+
+  <div class="profile-grid">
+    <!-- Profile Card -->
+    <div class="profile-card card">
+      <div class="avatar">{{ student.name.charAt(0) }}</div>
+      <h2>{{ student.name }}</h2>
+      <p class="roll">{{ student.rollNumber }}</p>
+      <p class="dept">{{ student.department }}</p>
+
+      <div class="profile-stats">
+        <div class="pstat">
+          <span class="pstat-val">{{ student.semester }}</span>
+          <span class="pstat-lbl">Semester</span>
+        </div>
+        <div class="pstat">
+          <span class="pstat-val">{{ student.gpa }}</span>
+          <span class="pstat-lbl">GPA</span>
+        </div>
+        <div class="pstat">
+          <span class="pstat-val">{{ enrolledCourses.length }}</span>
+          <span class="pstat-lbl">Courses</span>
+        </div>
+        <div class="pstat">
+          <span class="pstat-val">{{ totalCredits }}</span>
+          <span class="pstat-lbl">Credits</span>
+        </div>
+      </div>
+
+      <div class="contact">
+        <p>📧 {{ student.email }}</p>
+      </div>
+    </div>
+
+    <!-- Enrolled Courses -->
+    <div class="enrolled-section">
+      <h2>Enrolled Courses</h2>
+
+      <div class="alert alert-info" *ngIf="enrolledCourses.length === 0">
+        You are not enrolled in any courses yet.
+        <a routerLink="/courses">Browse courses →</a>
+      </div>
+
+      <div class="enrolled-card card" *ngFor="let course of enrolledCourses">
+        <div class="ec-header">
+          <span class="badge badge-blue">{{ course.category }}</span>
+          <span class="badge badge-green">{{ course.credits | creditLabel }}</span>
+        </div>
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.instructor }}</p>
+        <div class="ec-meta">
+          <span>⭐ {{ course.rating }}</span>
+          <span>⏱ {{ course.duration }}</span>
+        </div>
+        <a [routerLink]="['/courses', course.id]" class="btn btn-primary btn-sm">View Details</a>
+      </div>
+
+      <div class="summary card" *ngIf="enrolledCourses.length > 0">
+        <h3>Summary</h3>
+        <p>Total Credits: <strong>{{ totalCredits }}</strong></p>
+        <p>Average Rating: <strong>{{ averageRating | number:'1.1-1' }}</strong></p>
+      </div>
+    </div>
+  </div>
+</div>

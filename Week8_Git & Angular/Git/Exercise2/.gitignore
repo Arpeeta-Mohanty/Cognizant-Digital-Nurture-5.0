@@ -1,0 +1,15 @@
+# Ignore all log files
+*.log
+
+# Ignore the logs directory
+logs/
+
+# Ignore the backup directory
+backup/
+
+# Common additions for a real project:
+# node_modules/
+# dist/
+# .env
+# .DS_Store
+# Thumbs.db

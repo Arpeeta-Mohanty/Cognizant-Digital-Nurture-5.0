@@ -1,0 +1,169 @@
+<!-- ============================================================
+     Hands-On 1: Project Setup, Navigation, Course List
+     Hands-On 2: Interpolation, Property Binding, Event Binding,
+                 Two-way Binding, ngModel, Lifecycle Hooks
+     Hands-On 3: *ngIf, *ngFor, *ngSwitch, ngClass, ngStyle,
+                 Custom Directive, Custom Pipe
+     ============================================================ -->
+
+<div class="home-page container">
+
+  <!-- ── Interpolation ── -->
+  <section class="hero card">
+    <!-- {{ }} is interpolation — evaluates expression and renders as text -->
+    <h1>{{ welcomeMessage }}</h1>
+    <p>Portal: <strong>{{ portalName }}</strong> | Year: <strong>{{ currentYear }}</strong></p>
+    <p>Total Students Enrolled: <strong>{{ totalStudents | number }}</strong></p>
+
+    <!-- Property Binding: [src] binds to the src attribute -->
+    <img [src]="logoUrl" [alt]="portalName" class="logo" width="60" />
+
+    <!-- Property Binding: [disabled] binds to the disabled property -->
+    <button class="btn btn-primary" [disabled]="buttonDisabled" (click)="buttonDisabled=true">
+      {{ buttonDisabled ? 'Portal Active' : 'Activate Portal' }}
+    </button>
+
+    <!-- *ngIf: conditionally renders the element -->
+    <span class="badge badge-green" *ngIf="isPortalActive">● Live</span>
+  </section>
+
+  <!-- ── Stats ── -->
+  <section class="stats-row">
+    <div class="stat-card card">
+      <div class="stat-number">{{ stats.totalCourses }}</div>
+      <div class="stat-label">Total Courses</div>
+    </div>
+    <div class="stat-card card">
+      <div class="stat-number">{{ stats.enrolledCourses }}</div>
+      <div class="stat-label">Enrolled</div>
+    </div>
+    <div class="stat-card card">
+      <div class="stat-number">{{ stats.availableCourses }}</div>
+      <div class="stat-label">Available</div>
+    </div>
+    <div class="stat-card card">
+      <div class="stat-number">{{ totalStudents }}</div>
+      <div class="stat-label">Students</div>
+    </div>
+  </section>
+
+  <!-- ── Two-way Binding with ngModel ── -->
+  <section class="search-section card">
+    <h2>Search & Filter</h2>
+
+    <!-- [(ngModel)] is two-way binding: component → view AND view → component -->
+    <input
+      class="form-control"
+      type="text"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Search courses or instructors..."
+    />
+
+    <!-- Event Binding: (click) listens to click events -->
+    <div class="category-filters">
+      <button
+        *ngFor="let cat of categories"
+        class="btn"
+        [ngClass]="{ 'btn-primary': selectedCategory === cat, 'btn-secondary': selectedCategory !== cat }"
+        (click)="onCategoryChange(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Interpolation showing live two-way binding result -->
+    <p class="binding-demo">
+      Live search value: <code>{{ searchQuery || '(empty)' }}</code> |
+      Category: <code>{{ selectedCategory }}</code> |
+      Last action: <code>{{ lastAction }}</code> |
+      Clicks: <code>{{ clickCount }}</code>
+    </p>
+  </section>
+
+  <!-- ── *ngFor + *ngIf + ngClass + ngStyle + Custom Directive + Custom Pipe ── -->
+  <section class="courses-section">
+    <h2 class="page-title">
+      Courses
+      <span class="badge badge-blue">{{ filteredCourses.length }} found</span>
+    </h2>
+
+    <!-- *ngIf: show message when no courses match -->
+    <div class="alert alert-info" *ngIf="filteredCourses.length === 0">
+      No courses found for "{{ searchQuery }}" in category "{{ selectedCategory }}".
+    </div>
+
+    <div class="grid-3">
+      <!-- *ngFor: renders one card per course; trackBy improves performance -->
+      <div
+        class="course-card card"
+        *ngFor="let course of filteredCourses; trackBy: trackByCourseId; let i = index"
+        (click)="onCardClick(course)"
+        appHighlight
+        [highlightColor]="course.enrolled ? '#c6f6d5' : '#ebf8ff'"
+      >
+        <!-- ngClass: applies CSS classes conditionally -->
+        <div class="course-header"
+             [ngClass]="{ 'enrolled-header': course.enrolled, 'available-header': !course.enrolled }">
+          <span class="course-index">#{{ i + 1 }}</span>
+          <span class="badge" [ngClass]="{
+            'badge-blue': course.category === 'Frontend',
+            'badge-green': course.category === 'Backend',
+            'badge-yellow': course.category === 'Core CS',
+            'badge-red': course.category === 'Database'
+          }">{{ course.category }}</span>
+        </div>
+
+        <h3 class="course-title">{{ course.title }}</h3>
+        <p class="course-instructor">👨‍🏫 {{ course.instructor }}</p>
+        <p class="course-desc">{{ course.description }}</p>
+
+        <div class="course-meta">
+          <!-- Custom Pipe: creditLabel transforms number to descriptive string -->
+          <span class="badge badge-blue">{{ course.credits | creditLabel }}</span>
+          <span class="badge badge-yellow">⭐ {{ course.rating }}</span>
+          <span class="badge badge-green">⏱ {{ course.duration }}</span>
+        </div>
+
+        <!-- *ngSwitch: renders different content based on category -->
+        <div class="course-icon" [ngSwitch]="course.category">
+          <span *ngSwitchCase="'Frontend'">🌐</span>
+          <span *ngSwitchCase="'Backend'">⚙️</span>
+          <span *ngSwitchCase="'Core CS'">💻</span>
+          <span *ngSwitchCase="'Database'">🗄️</span>
+          <span *ngSwitchCase="'Cloud'">☁️</span>
+          <span *ngSwitchCase="'AI/ML'">🤖</span>
+          <span *ngSwitchDefault>📚</span>
+        </div>
+
+        <!-- ngStyle: applies inline styles dynamically -->
+        <div class="rating-bar"
+             [ngStyle]="{ width: (course.rating / 5 * 100) + '%', background: course.rating >= 4.7 ? '#48bb78' : '#4299e1' }">
+        </div>
+
+        <div class="course-actions">
+          <button
+            class="btn"
+            [ngClass]="course.enrolled ? 'btn-danger' : 'btn-success'"
+            (click)="onEnrollToggle(course, $event)">
+            {{ course.enrolled ? 'Unenroll' : 'Enroll' }}
+          </button>
+          <a [routerLink]="['/courses', course.id]" class="btn btn-secondary" (click)="$event.stopPropagation()">
+            Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quick Navigation ── -->
+  <section class="quick-nav card">
+    <h2>Quick Navigation</h2>
+    <div class="nav-grid">
+      <a routerLink="/courses" class="nav-tile">📚 All Courses</a>
+      <a routerLink="/profile" class="nav-tile">👤 My Profile</a>
+      <a routerLink="/enrollment" class="nav-tile">📝 Enroll Now</a>
+      <a routerLink="/reactive-form" class="nav-tile">⚡ Reactive Form</a>
+    </div>
+  </section>
+
+</div>
